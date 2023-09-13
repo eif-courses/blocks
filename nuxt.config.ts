@@ -1,14 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-    devtools: {enabled: true},
     css: [
         'primevue/resources/themes/saga-blue/theme.css',
         'primevue/resources/primevue.css',
         'primeicons/primeicons.css',
         'primeflex/primeflex.css'],
     build: {
-        transpile: ["primevue"],
+        transpile: ["primevue", "vue-i18n"],
     },
     ssr: false,
     modules: ['@pinia/nuxt',
@@ -31,13 +30,11 @@ export default defineNuxtConfig({
                 file: "lt-LT.ts",
             },
         ],
-        lazy: true,
         langDir: "lang",
-        strategy: "prefix",
-        defaultLocale: "lt-LT",
-        detectBrowserLanguage: false,
-        //vueI18n: './i18n.config.ts' // if you are using custom path, default
+        defaultLocale: "en-US",
+        vueI18n: './i18n.config.ts' // if you are using custom path, default
     },
+    // },
     pinia: {
         autoImports: [
             // automatically imports `useAuthStore`

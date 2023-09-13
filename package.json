@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "blocks",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -13,12 +13,10 @@
     "pinia": "^2.1.6",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
-    "primevue": "^3.34.1",
-    "zod": "^3.22.2"
+    "primevue": "^3.34.1"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
-    "@nuxtjs/i18n": "8.0.0-rc.4",
-    "nuxt": "^3.7.1"
+    "@nuxtjs/i18n": "^8.0.0-rc.4",
+    "nuxt": "^3.7.2"
   }
 }
