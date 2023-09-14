@@ -11,7 +11,8 @@ export default defineNuxtConfig({
         transpile: ["primevue", "vue-i18n"],
     },
     ssr: false,
-    modules: ['@pinia/nuxt',
+    modules: [
+        '@pinia/nuxt',
         '@nuxtjs/i18n',
     ],
     i18n: {
@@ -34,13 +35,5 @@ export default defineNuxtConfig({
         langDir: "lang",
         defaultLocale: "en-US",
         vueI18n: './i18n.config.ts' // if you are using custom path, default
-    },
-    // },
-    pinia: {
-        autoImports: [
-            // automatically imports `useAuthStore`
-            'useAuthStore', // import { useAuthStore } from 'pinia'
-            // ['defineStore', 'definePiniaStore'], // import { defineStore as definePiniaStore } from 'pinia'
-        ],
     },
 })

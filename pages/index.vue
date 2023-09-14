@@ -5,6 +5,7 @@ import {useAuthStore} from '~/store/auth';
 const store = useAuthStore(); // use auth store
 const {categories} = storeToRefs(store); // make authenticated state reactive
 
+
 const user = ref({
   username: 'ma@gmail.com',
   password: 'kosmosas',

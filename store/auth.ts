@@ -12,13 +12,14 @@ interface CategoryInterface {
 
 
 const BASE_URL = "https://onlinecourses-production.up.railway.app"
-
+const STORE_NAME = 'auth'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         authenticated: false,
         loading: false,
         categories: [] as CategoryInterface[],
+        name: "" as string | undefined,
         id: 0,
     }),
     actions: {
@@ -45,11 +46,6 @@ export const useAuthStore = defineStore('auth', {
             const token = useCookie('token'); // useCookie new hook in nuxt 3
             this.authenticated = false; // set authenticated  state value to false
             token.value = null; // clear the token cookie
-        },
-
-        getCategoryById(id: number){
-            const result = this.categories.find((category: CategoryInterface) => category.id === id);
-            return result?.name;
         },
     },
     getters: {
@@ -79,7 +75,13 @@ export const useAuthStore = defineStore('auth', {
             }
 
         },
+        getCategoryById: (state) => {
+            return (id: number) => state.categories.find((category: CategoryInterface) => category.id === id);
+        },
     },
-
-
 });
+
+// Activate hot reloading for this store
+// if(import.meta.hot) {
+//     import.meta.hot.accept(acceptHMRUpdate(useAuthStore, import.meta.hot));
+// }

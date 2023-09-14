@@ -1,15 +1,25 @@
 <script setup>
 import {useAuthStore} from "~/store/auth";
-import {storeToRefs} from "pinia";
 
 const store = useAuthStore(); // use auth store
-const {categories} = storeToRefs(store); // make authenticated state reactive
 const route = useRoute()
+const categoryId = +route.params.id
+const catName = ref("");
+
+// Caching or Persisting data with cookies
+onMounted(async () => {
+  const cookie = useCookie('category_' + categoryId);
+  if (cookie.value === undefined) {
+    const category = store.getCategoryById(categoryId);
+    cookie.value = category.name;
+  }
+  catName.value = cookie.value;
+});
 
 </script>
 
 <template>
-  result: {{ store.getCategoryById(+route.params.id) }}
+  {{ catName }}
 </template>
 
 <style scoped>
