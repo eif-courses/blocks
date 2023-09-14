@@ -5,6 +5,11 @@ interface UserPayloadInterface {
     password: string;
 }
 
+interface CategoryInterface {
+    id: number;
+    name: string;
+}
+
 
 const BASE_URL = "https://onlinecourses-production.up.railway.app"
 
@@ -13,7 +18,7 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
         authenticated: false,
         loading: false,
-        categories: [],
+        categories: [] as CategoryInterface[],
         id: 0,
     }),
     actions: {
@@ -40,6 +45,11 @@ export const useAuthStore = defineStore('auth', {
             const token = useCookie('token'); // useCookie new hook in nuxt 3
             this.authenticated = false; // set authenticated  state value to false
             token.value = null; // clear the token cookie
+        },
+
+        getCategoryById(id: number){
+            const result = this.categories.find((category: CategoryInterface) => category.id === id);
+            return result?.name;
         },
     },
     getters: {
@@ -69,10 +79,6 @@ export const useAuthStore = defineStore('auth', {
             }
 
         },
-        getCategoryById(state) {
-            return this.categories.find((category: any) => category.id === state.id);
-        },
-
     },
 
 

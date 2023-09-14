@@ -3,8 +3,7 @@ import {storeToRefs} from 'pinia';
 import {useAuthStore} from '~/store/auth';
 
 const store = useAuthStore(); // use auth store
-
-const {authenticated, categories} = storeToRefs(useAuthStore()); // make authenticated state reactive
+const {categories} = storeToRefs(store); // make authenticated state reactive
 
 const user = ref({
   username: 'ma@gmail.com',
@@ -19,7 +18,7 @@ function hello(str) {
 }
 
 onMounted(async () => {
-  await store.getCategories
+  await store.getCategories;
 });
 
 </script>
@@ -29,11 +28,12 @@ onMounted(async () => {
 
     <LangSwitcher/>
 
+
+<!--    (store.getCategoryById(cat.id))-->
     <ol v-for="cat in categories" :key="cat.id">
-      <li> {{ cat.name }}, {{cat.id}} <button @click="(store.$state.id = cat.id)">View more</button></li>
+      <li> {{ cat.name }}, {{cat.id}} <button @click="(router.push('/category/'+cat.id) )">View more</button></li>
     </ol>
 
-    <p>{{store.getCategoryById}}</p>
 
     <p>{{ $t('home.title') }}</p>
 
