@@ -1,9 +1,11 @@
 export default {
     app_title: "Kosmosas",
     nav: {
-        shows: "Shows",
-        blog: "Blog",
-        about: "About",
+        home: "Pagrindinis",
+        students: "Studentai",
+        reviewers: "Recenzentai",
+        documents: "Dokumentai",
+        help: "Pagalba",
     },
     home: {
         title: "Kkosmosas ta lokale",

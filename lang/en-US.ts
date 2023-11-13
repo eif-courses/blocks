@@ -1,9 +1,11 @@
 export default {
     app_title: "Andorable",
     nav: {
-        shows: "Shows",
-        blog: "Blog",
-        about: "About",
+        home: "Home",
+        students: "Students",
+        reviewers: "Reviewers",
+        documents: "Documents",
+        help: "Help",
     },
     home: {
         title: "Andorable - Star Wars Shows",
