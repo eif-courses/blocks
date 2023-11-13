@@ -27,16 +27,17 @@ onMounted(async () => {
 <template>
   <div>
 
-    <LangSwitcher/>
+<!--    <LangSwitcher/>-->
+
 
 
 <!--    (store.getCategoryById(cat.id))-->
-    <ol v-for="cat in categories" :key="cat.id">
-      <li> {{ cat.name }}, {{cat.id}} <button @click="(router.push('/category/'+cat.id) )">View more</button></li>
-    </ol>
+<!--    <ol v-for="cat in categories" :key="cat.id">-->
+<!--      <li> {{ cat.name }}, {{cat.id}} <button @click="(router.push('/category/'+cat.id) )">View more</button></li>-->
+<!--    </ol>-->
 
 
-    <p>{{ $t('home.title') }}</p>
+<!--    <p>{{ $t('home.title') }}</p>-->
 
 
 
