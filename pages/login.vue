@@ -13,10 +13,10 @@
 
       <div>
         <label for="email1" class="block text-900 font-medium mb-2">Email</label>
-        <InputText id="email1" type="text" placeholder="Email address" class="w-full mb-3" />
+        <InputText v-model="user.username" id="email1" type="text" placeholder="Email address" class="w-full mb-3" />
 
         <label for="password1" class="block text-900 font-medium mb-2">Password</label>
-        <InputText id="password1" type="password" placeholder="Password" class="w-full mb-3" />
+        <InputText v-model="user.password" id="password1" type="password" placeholder="Password" class="w-full mb-3" />
 
         <div class="flex align-items-center justify-content-between mb-6">
           <div class="flex align-items-center">
@@ -26,7 +26,7 @@
           <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot password?</a>
         </div>
 
-        <Button label="Sign In" icon="pi pi-user" class="w-full"></Button>
+        <Button label="Sign In" @click.prevent="login" icon="pi pi-user" class="w-full"></Button>
       </div>
     </div>
 
@@ -70,8 +70,8 @@ const {authenticateUser} = useAuthStore(); // use auth store
 const {authenticated} = storeToRefs(useAuthStore()); // make authenticated state reactive
 
 const user = ref({
-  username: 'ma@gmail.com',
-  password: 'kosmosas',
+  username: 'marius@example.com',
+  password: 'string',
 });
 const router = useRouter();
 

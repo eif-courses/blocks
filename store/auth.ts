@@ -5,27 +5,27 @@ interface UserPayloadInterface {
     password: string;
 }
 
-interface CategoryInterface {
+interface UserInterface {
     id: number;
     name: string;
 }
 
 
-const BASE_URL = "https://onlinecourses-production.up.railway.app"
+const BASE_URL = "http://127.0.0.1:8000"
 const STORE_NAME = 'auth'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         authenticated: false,
         loading: false,
-        categories: [] as CategoryInterface[],
+        users: [],
         name: "" as string | undefined,
         id: 0,
     }),
     actions: {
         async authenticateUser({username, password}: UserPayloadInterface) {
             // useFetch from nuxt 3
-            const {data, pending}: any = await useFetch(`${BASE_URL}/login`, {
+            const {data, pending}: any = await useFetch(`${BASE_URL}/api/v1/auth/login`, {
                 method: 'post',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 body: new URLSearchParams({
@@ -50,34 +50,34 @@ export const useAuthStore = defineStore('auth', {
     },
     getters: {
 
-        async getCategories(state) {
+        async getAllUsers(state) {
 
             if (this.authenticated) {
 
                 const token = useCookie('token');
                 const jwt = {Authorization: `Bearer ${token.value}`};
 
-                const {data, pending}: any = await useFetch(`${BASE_URL}/api/v1/products/categories`, {
+                const {data, pending}: any = await useFetch(`${BASE_URL}/api/v1/users`, {
                     method: 'get',
                     headers: jwt
                 });
                 state.loading = pending;
 
                 if (data.value) {
-                    state.categories = data.value;
-                    return state.categories;
+                    state.users = data.value;
+                    return state.users;
                 } else {
                     this.authenticated = false;
                 }
 
             } else {
-                return state.categories;
+                return state.users;
             }
 
         },
-        getCategoryById: (state) => {
-            return (id: number) => state.categories.find((category: CategoryInterface) => category.id === id);
-        },
+        // getCategoryById: (state) => {
+        //     return (id: number) => state.categories.find((category: CategoryInterface) => category.id === id);
+        // },
     },
 });
 
