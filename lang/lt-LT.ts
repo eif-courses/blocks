@@ -3,7 +3,7 @@ export default {
     nav: {
         home: "Pagrindinis",
         students: "Studentai",
-        reviewers: "Recenzentai",
+        reviewers: "Recenzentams",
         documents: "Dokumentai",
         help: "Pagalba",
         login: "Prisijungti",

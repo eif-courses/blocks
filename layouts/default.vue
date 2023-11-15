@@ -25,7 +25,7 @@
             </LocLink>
           </li>
           <li>
-            <LocLink v-if="store.role==='Reviewer'" to="reviewers" v-ripple
+            <LocLink v-if="store.authenticated && store.role==='Reviewer'" to="reviewer" v-ripple
                      class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
               <span>{{ $t('nav.reviewers') }}</span>
             </LocLink>
@@ -56,10 +56,9 @@
     </div>
 
 
-    <div class="p-4">
-      <div class="border-2 border-dashed surface-border border-round surface-card" style="min-height: 20rem">
+    <div class="p-4 md:p-6 lg:p-8 pt-2 lg:pt-2 md:pt-2 ">
+      <div class="" style="min-height: 1rem">
         <slot/>
-
       </div>
     </div>
 

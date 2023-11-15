@@ -7,6 +7,10 @@ import BadgeDirective from "primevue/badgedirective";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
 import FileUpload from "primevue/fileupload";
+import Accordion from "primevue/accordion";
+import AccordionTab from "primevue/accordiontab";
+import Fieldset from "primevue/fieldset";
+import Avatar from "primevue/avatar";
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue, {ripple: true});
@@ -17,6 +21,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component("InputText", InputText)
     nuxtApp.vueApp.component("Checkbox", Checkbox)
     nuxtApp.vueApp.component("FileUpload", FileUpload)
+    nuxtApp.vueApp.component("Accordion", Accordion)
+    nuxtApp.vueApp.component("AccordionTab", AccordionTab)
+    nuxtApp.vueApp.component("Fieldset", Fieldset)
+    nuxtApp.vueApp.component("Avatar", Avatar)
 
 
 

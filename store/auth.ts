@@ -10,8 +10,12 @@ interface UserInterface {
     name: string;
 }
 
-interface DocumentsInterface {
-
+interface ReviewerDocumentsInterface {
+    DocumentID: string,
+    FileName: string,
+    FilePath: string,
+    UploadDate: string,
+    StudentName: string
 }
 
 
@@ -25,6 +29,7 @@ export const useAuthStore = defineStore('auth', {
         users: [],
         role: "",
         documents: [],
+        reviewerDocuments: [] as ReviewerDocumentsInterface[],
         name: "" as string | undefined,
         id: 0,
     }),
@@ -56,6 +61,35 @@ export const useAuthStore = defineStore('auth', {
                 this.authenticated = true; // set authenticated  state value to true
             }
         },
+
+        async downloadFile(filePath) {
+            try {
+                const token = useCookie('token');
+                const jwt = { Authorization: `Bearer ${token.value}` };
+
+                // You might want to adjust the endpoint and headers based on your backend API
+                const response = await useFetch(`${BASE_URL}/api/v1/storage/download_files?folder_path=${encodeURIComponent(filePath)}`, {
+                    method: 'GET',
+                    headers: jwt,
+                });
+
+                if (!response.ok) {
+                    // Handle non-successful responses
+                    throw new Error(`Failed to download file. Status: ${response.status}`);
+                }
+
+                // Assuming the response contains the file data
+                // const data = await response.json();
+                // Handle the downloaded data as needed
+
+                return data;
+            } catch (error) {
+                console.error('Error downloading file:', error);
+                throw error;
+            }
+        },
+
+
         logUserOut() {
             const token = useCookie('token'); // useCookie new hook in nuxt 3
             this.authenticated = false; // set authenticated  state value to false
@@ -116,7 +150,32 @@ export const useAuthStore = defineStore('auth', {
             } else {
                 return state.documents;
             }
+        },
+        async getReviewerDocuments(state) {
+            if (this.authenticated) {
+
+                const token = useCookie('token');
+                const jwt = {Authorization: `Bearer ${token.value}`};
+
+                const {data, pending}: any = await useFetch(`${BASE_URL}/api/v1/users/reviewer_students`, {
+                    method: 'get',
+                    headers: jwt
+                });
+                state.loading = pending;
+
+                if (data.value) {
+                    state.reviewerDocuments = data.value;
+                    return state.reviewerDocuments;
+                } else {
+                    this.authenticated = false;
+                }
+
+            } else {
+                return state.reviewerDocuments;
+            }
         }
+
+
         // getCategoryById: (state) => {
         //     return (id: number) => state.categories.find((category: CategoryInterface) => category.id === id);
         // },
