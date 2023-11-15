@@ -6,6 +6,7 @@ import Ripple from "primevue/ripple";
 import BadgeDirective from "primevue/badgedirective";
 import InputText from "primevue/inputtext";
 import Checkbox from "primevue/checkbox";
+import FileUpload from "primevue/fileupload";
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue, {ripple: true});
@@ -15,6 +16,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.directive("badge", BadgeDirective)
     nuxtApp.vueApp.component("InputText", InputText)
     nuxtApp.vueApp.component("Checkbox", Checkbox)
+    nuxtApp.vueApp.component("FileUpload", FileUpload)
 
 
 

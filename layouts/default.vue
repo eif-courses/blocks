@@ -12,36 +12,34 @@
         <ul class="list-none p-0 m-0 flex lg:align-items-center text-900 select-none flex-column lg:flex-row cursor-pointer">
 
 
-
-
           <li>
-            <LocLink to="login" v-ripple
-                       class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
+            <LocLink to="/" v-ripple
+                     class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
               <span>{{ $t('nav.home') }}</span>
             </LocLink>
           </li>
           <li>
-            <LocLink to="students" v-ripple
-               class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
-              <span>{{ $t('nav.students')}}</span>
+            <LocLink v-if="store.role==='Moderator'" to="students" v-ripple
+                     class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
+              <span>{{ $t('nav.students') }}</span>
             </LocLink>
           </li>
           <li>
-            <LocLink to="reviewers" v-ripple
-               class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
-              <span>{{ $t('nav.reviewers')}}</span>
+            <LocLink v-if="store.role==='Reviewer'" to="reviewers" v-ripple
+                     class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
+              <span>{{ $t('nav.reviewers') }}</span>
             </LocLink>
           </li>
-          <li>
+          <li v-if="store.role==='Student'">
             <LocLink to="documents" v-ripple
                      class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
-              <span>{{ $t('nav.documents')}}</span>
+              <span>{{ $t('nav.documents') }}</span>
             </LocLink>
           </li>
           <li>
             <LocLink to="help" v-ripple
                      class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
-              <span>{{ $t('nav.help')}}</span>
+              <span>{{ $t('nav.help') }}</span>
             </LocLink>
           </li>
           <li>
@@ -64,21 +62,22 @@
       </div>
     </div>
 
-
-    <footer v-if="authenticated">
-      <h1>Footer</h1>
-    </footer>
   </div>
 </template>
 <script lang="ts" setup>
-import {storeToRefs} from 'pinia';
+
 import {useAuthStore} from '~/store/auth';
 
 const router = useRouter();
 
 const {logUserOut} = useAuthStore();
-const {authenticated} = storeToRefs(useAuthStore()); // make authenticated state reactive
+const store = useAuthStore();
 
+onMounted(async () => {
+  if (!store.authenticated) {
+    await router.push('login');
+  }
+});
 const logout = () => {
   logUserOut();
   router.push('/login');

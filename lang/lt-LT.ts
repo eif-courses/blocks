@@ -7,6 +7,11 @@ export default {
         documents: "Dokumentai",
         help: "Pagalba",
     },
+    upload:{
+        chooseLabel: "Pasirinkti",
+        uploadLabel: "Įkelti failus",
+        cancelLabel: "Atšaukti"
+    },
     home: {
         title: "Kkosmosas ta lokale",
         header: "Currently Streaming",

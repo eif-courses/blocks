@@ -7,6 +7,13 @@ export default {
         documents: "Documents",
         help: "Help",
     },
+    upload:{
+        chooseLabel: "Choose",
+        uploadLabel: "Upload",
+        cancelLabel: "Cancel",
+    },
+
+
     home: {
         title: "Andorable - Star Wars Shows",
         header: "Currently Streaming",

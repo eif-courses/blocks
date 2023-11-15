@@ -10,6 +10,10 @@ interface UserInterface {
     name: string;
 }
 
+interface DocumentsInterface {
+
+}
+
 
 const BASE_URL = "http://127.0.0.1:8000"
 const STORE_NAME = 'auth'
@@ -19,6 +23,8 @@ export const useAuthStore = defineStore('auth', {
         authenticated: false,
         loading: false,
         users: [],
+        role: "",
+        documents: [],
         name: "" as string | undefined,
         id: 0,
     }),
@@ -38,6 +44,11 @@ export const useAuthStore = defineStore('auth', {
             if (data.value) {
                 const token = useCookie('token'); // useCookie new hook in nuxt 3
                 token.value = data?.value?.access_token; // set token to cookie
+
+                // const superSecretRole = useCookie('role'); // useCookie new hook in nuxt 3
+                // superSecretRole.value = data?.value?.role; // set token to cookie
+                this.role = data?.value?.role;
+
                 // console.log(data?.value?.access_token);
                 this.authenticated = true; // set authenticated  state value to true
             }
@@ -75,6 +86,30 @@ export const useAuthStore = defineStore('auth', {
             }
 
         },
+        async getMyDocuments(state) {
+
+            if (this.authenticated) {
+
+                const token = useCookie('token');
+                const jwt = {Authorization: `Bearer ${token.value}`};
+
+                const {data, pending}: any = await useFetch(`${BASE_URL}/api/v1/storage/documents`, {
+                    method: 'get',
+                    headers: jwt
+                });
+                state.loading = pending;
+
+                if (data.value) {
+                    state.documents = data.value;
+                    return state.documents;
+                } else {
+                    this.authenticated = false;
+                }
+
+            } else {
+                return state.documents;
+            }
+        }
         // getCategoryById: (state) => {
         //     return (id: number) => state.categories.find((category: CategoryInterface) => category.id === id);
         // },
