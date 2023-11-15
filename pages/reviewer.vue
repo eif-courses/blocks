@@ -37,7 +37,7 @@ interface ReviewerDocumentsInterface {
 
 // Group documents by student name
 const groupedDocuments = computed(() => {
-  const grouped = {};
+  const grouped: Record<string, ReviewerDocumentsInterface[]> = {};
   store.reviewerDocuments.forEach((doc) => {
     const studentName = doc.StudentName;
     if (!grouped[studentName]) {
@@ -45,7 +45,7 @@ const groupedDocuments = computed(() => {
     }
     grouped[studentName].push(doc);
   });
-  return grouped as Record<string, ReviewerDocumentsInterface[]>
+  return grouped;
 });
 </script>
 
@@ -63,7 +63,7 @@ const groupedDocuments = computed(() => {
           </template>
           <p v-for="doc in group" :key="doc.DocumentID" class="m-0">
             {{ doc.FileName }}
-            <span> <Button @click="store.downloadFile(doc.FilePath)">Atsisiųsti viską</Button></span>
+            <span> <Button @click="store.downloadFile(doc.FilePath.toString(), doc.StudentName.toString())">Atsisiųsti viską</Button></span>
           </p>
         </Fieldset>
       </div>

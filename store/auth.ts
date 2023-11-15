@@ -19,7 +19,7 @@ interface ReviewerDocumentsInterface {
 }
 
 
-const BASE_URL = "http://127.0.0.1:8000"
+const BASE_URL = "https://bdtalpykla-production.up.railway.app"
 const STORE_NAME = 'auth'
 
 export const useAuthStore = defineStore('auth', {
@@ -62,13 +62,16 @@ export const useAuthStore = defineStore('auth', {
             }
         },
 
-        async downloadFile(filePath) {
+
+// ...
+
+        async downloadFile(folderPath: string, zipFolderName: string) {
             try {
                 const token = useCookie('token');
                 const jwt = { Authorization: `Bearer ${token.value}` };
 
-                // You might want to adjust the endpoint and headers based on your backend API
-                const response = await useFetch(`${BASE_URL}/api/v1/storage/download_files?folder_path=${encodeURIComponent(filePath)}`, {
+                // Adjust the endpoint and headers based on your backend API
+                const response = await fetch(`${BASE_URL}/api/v1/storage/download_files?folder_path=${encodeURIComponent(folderPath)}`, {
                     method: 'GET',
                     headers: jwt,
                 });
@@ -78,9 +81,24 @@ export const useAuthStore = defineStore('auth', {
                     throw new Error(`Failed to download file. Status: ${response.status}`);
                 }
 
-                // Assuming the response contains the file data
-                // const data = await response.json();
-                // Handle the downloaded data as needed
+                // Extract filename from the Content-Disposition header, if available
+                const contentDisposition = response.headers.get('Content-Disposition');
+                const filenameMatch = contentDisposition && contentDisposition.match(/filename="(.+)"/);
+                const filename = filenameMatch ? filenameMatch[1] : 'downloaded_file';
+
+                // Create a Blob from the response data
+                const data = await response.blob();
+
+                // Create a download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = URL.createObjectURL(data);
+                downloadLink.download = filename;
+
+                // Trigger the download
+                downloadLink.click();
+
+                // Clean up the object URL
+                URL.revokeObjectURL(downloadLink.href);
 
                 return data;
             } catch (error) {
