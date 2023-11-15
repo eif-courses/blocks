@@ -48,6 +48,9 @@ export const useAuthStore = defineStore('auth', {
                 // const superSecretRole = useCookie('role'); // useCookie new hook in nuxt 3
                 // superSecretRole.value = data?.value?.role; // set token to cookie
                 this.role = data?.value?.role;
+                const r = useCookie('role');
+                r.value = data?.value?.role;
+
 
                 // console.log(data?.value?.access_token);
                 this.authenticated = true; // set authenticated  state value to true
@@ -57,6 +60,10 @@ export const useAuthStore = defineStore('auth', {
             const token = useCookie('token'); // useCookie new hook in nuxt 3
             this.authenticated = false; // set authenticated  state value to false
             token.value = null; // clear the token cookie
+
+            const r = useCookie('role');
+            r.value = null;
+
         },
     },
     getters: {

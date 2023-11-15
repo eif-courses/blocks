@@ -30,7 +30,7 @@
               <span>{{ $t('nav.reviewers') }}</span>
             </LocLink>
           </li>
-          <li v-if="store.role==='Student'">
+          <li v-if="store.authenticated && store.role==='Student'">
             <LocLink to="documents" v-ripple
                      class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
               <span>{{ $t('nav.documents') }}</span>
@@ -73,6 +73,11 @@ const router = useRouter();
 
 const {logUserOut} = useAuthStore();
 const store = useAuthStore();
+
+// onMounted(async () => {
+//   console.log('role', store.role);
+//
+// });
 
 const logout = () => {
   logUserOut();

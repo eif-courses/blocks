@@ -10,7 +10,10 @@ onMounted(async () => {
     await router.push('login');
     return; // Stop execution if not authenticated
   }
-
+  if (store.role !== 'Student') {
+    await router.push('login');
+    return; // Stop execution if not authenticated
+  }
   try {
     await store.getMyDocuments;
   } catch (error) {
