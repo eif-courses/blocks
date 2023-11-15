@@ -13,6 +13,15 @@ export default {
         uploadLabel: "Įkelti failus",
         cancelLabel: "Atšaukti"
     },
+    table:{
+        new: "Naujas",
+        edit: "Redaguoti",
+        delete: "Pašalinti",
+        save: "Išsaugoti",
+        name: "Studentų sąrašas",
+        import: "Importuoti",
+        export: "Eksportuoti",
+    },
     home: {
         title: "Kkosmosas ta lokale",
         header: "Currently Streaming",

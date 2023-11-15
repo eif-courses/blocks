@@ -13,6 +13,15 @@ export default {
         uploadLabel: "Upload",
         cancelLabel: "Cancel",
     },
+    table:{
+        new: "New",
+        edit: "Edit",
+        delete: "Delete",
+        save: "Save",
+        name: "List of Students",
+        import: "Import",
+        export: "Export",
+    },
 
 
     home: {
