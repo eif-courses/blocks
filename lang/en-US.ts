@@ -6,6 +6,7 @@ export default {
         reviewers: "Reviewers",
         documents: "Documents",
         help: "Help",
+        login: "Login",
     },
     upload:{
         chooseLabel: "Choose",

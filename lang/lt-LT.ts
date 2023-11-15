@@ -6,6 +6,7 @@ export default {
         reviewers: "Recenzentai",
         documents: "Dokumentai",
         help: "Pagalba",
+        login: "Prisijungti",
     },
     upload:{
         chooseLabel: "Pasirinkti",

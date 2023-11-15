@@ -70,7 +70,7 @@ const {authenticateUser} = useAuthStore(); // use auth store
 const {authenticated} = storeToRefs(useAuthStore()); // make authenticated state reactive
 
 const user = ref({
-  username: 'marius@example.com',
+  username: 'm@example.com',
   password: 'string',
 });
 const router = useRouter();

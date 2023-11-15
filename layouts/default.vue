@@ -19,7 +19,7 @@
             </LocLink>
           </li>
           <li>
-            <LocLink v-if="store.role==='Moderator'" to="students" v-ripple
+            <LocLink v-if="store.authenticated && store.role ==='Moderator'" to="students" v-ripple
                      class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
               <span>{{ $t('nav.students') }}</span>
             </LocLink>
@@ -48,8 +48,9 @@
         </ul>
         <div
             class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-          <Button label="Login" class="p-button-text font-bold"></Button>
-          <Button label="Register" class="ml-3 font-bold"></Button>
+          <Button v-if="!store.authenticated" @click="login" :label="$t('nav.login')"
+                  class="p-button-text font-bold"></Button>
+          <Button v-else @click="logout" label="Logout" class="p-button-text font-bold"></Button>
         </div>
       </div>
     </div>
@@ -73,13 +74,13 @@ const router = useRouter();
 const {logUserOut} = useAuthStore();
 const store = useAuthStore();
 
-onMounted(async () => {
-  if (!store.authenticated) {
-    await router.push('login');
-  }
-});
 const logout = () => {
   logUserOut();
   router.push('/login');
 };
+
+const login = () => {
+  router.push('/login');
+}
+
 </script>

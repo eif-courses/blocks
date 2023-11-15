@@ -1,29 +1,23 @@
 <script setup lang="ts">
-import {storeToRefs} from 'pinia';
-import {useAuthStore} from '~/store/auth';
+import { useAuthStore } from '~/store/auth';
 
-const store = useAuthStore(); // use auth store
-const {documents} = storeToRefs(store); // make authenticated state reactive
-
-
-// TODO make loading progress bar visible
-import {ref} from 'vue';
-
-const isLoading = ref(true);
+const store = useAuthStore();
 const router = useRouter();
-onMounted(async () => {
+const isLoading = ref(true);
 
+onMounted(async () => {
   if (!store.authenticated) {
     await router.push('login');
-  } else {
-    try {
-      await store.getMyDocuments;
-    } catch (error) {
-      console.error('Error fetching documents:', error);
-      // Handle error as needed
-    } finally {
-      isLoading.value = false;
-    }
+    return; // Stop execution if not authenticated
+  }
+
+  try {
+    await store.getMyDocuments;
+  } catch (error) {
+    console.error('Error fetching documents:', error);
+    // Handle error as needed, e.g., display an error message to the user
+  } finally {
+    isLoading.value = false;
   }
 });
 
@@ -32,9 +26,8 @@ function openFileByUrl(url: string) {
 }
 
 
-// TODO make file upload work
-const uploaderDocuments = ref([]); // Assuming documents is an array to store uploaded files
 
+// TODO - implement this method to handle the uploaded files
 const onAdvancedUpload = (event: any) => {
   // Handle the uploaded files here
   const uploadedFiles = event.files;
@@ -44,8 +37,6 @@ const onAdvancedUpload = (event: any) => {
   // Assuming you have a method to upload files to the server (you might need to adjust this)
   uploadFilesToServer(uploadedFiles);
 
-  // Assuming you want to update the documents array with the new files
-  uploaderDocuments.value = uploaderDocuments.value.concat(uploadedFiles);
 };
 
 const uploadFilesToServer = (files: any) => {
@@ -90,7 +81,7 @@ const uploadFilesToServer = (files: any) => {
 
       <div class="col-12 p-3">
         <div class="text-500 font-medium mb-3">Files</div>
-        <div v-for="(doc, index) in documents" :key="index"
+        <div v-for="(doc, index) in store.documents" :key="index"
              class="flex md:align-items-center md:justify-content-between border-top-1 surface-border p-3 flex-column md:flex-row">
           <div class="flex align-items-center">
             <span class="block pi pi-file mr-2"></span>
