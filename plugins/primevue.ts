@@ -11,6 +11,9 @@ import Accordion from "primevue/accordion";
 import AccordionTab from "primevue/accordiontab";
 import Fieldset from "primevue/fieldset";
 import Avatar from "primevue/avatar";
+import Toast from "primevue/toast";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue, {ripple: true});
@@ -25,8 +28,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.component("AccordionTab", AccordionTab)
     nuxtApp.vueApp.component("Fieldset", Fieldset)
     nuxtApp.vueApp.component("Avatar", Avatar)
+    nuxtApp.vueApp.component("Toast", Toast)
+    nuxtApp.vueApp.component("DataTable", DataTable)
+    nuxtApp.vueApp.component("Column", Column)
 
-
-
-    //other components that you need
 });
