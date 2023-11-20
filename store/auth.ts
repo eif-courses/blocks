@@ -19,7 +19,7 @@ interface ReviewerDocumentsInterface {
 }
 
 
-const BASE_URL = "https://bdtalpykla-production.up.railway.app"
+const BASE_URL = "https://bdtalpykla-i5gc477mka-ey.a.run.app"
 const STORE_NAME = 'auth'
 
 export const useAuthStore = defineStore('auth', {

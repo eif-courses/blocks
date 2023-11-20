@@ -66,7 +66,7 @@ const uploadFilesToServer = (files: any) => {
           <FileUpload
               mode="advanced"
               name="files"
-              url="http://localhost:8000/api/v1/storage/upload_test_files"
+              url="https://bdtalpykla-i5gc477mka-ey.a.run.app/api/v1/storage/upload_test_files"
               @upload="onAdvancedUpload($event)"
               :multiple="true"
               :maxFileSize="900000000"
