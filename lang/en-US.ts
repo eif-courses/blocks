@@ -7,6 +7,7 @@ export default {
         documents: "Documents",
         help: "Help",
         login: "Login",
+        logout: "Logout",
     },
     upload:{
         chooseLabel: "Choose",

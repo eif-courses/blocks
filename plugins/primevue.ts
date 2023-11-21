@@ -23,7 +23,7 @@ import ToastService from "primevue/toastservice/toastservice.esm";
 import Dropdown from "primevue/dropdown";
 import Rating from "primevue/rating";
 import Tag from "primevue/tag";
-
+import "public/flags.css";
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(PrimeVue, {ripple: true});
 

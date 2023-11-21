@@ -7,6 +7,7 @@ export default {
         documents: "Dokumentai",
         help: "Pagalba",
         login: "Prisijungti",
+        logout: "Atsijungti",
     },
     upload:{
         chooseLabel: "Pasirinkti",

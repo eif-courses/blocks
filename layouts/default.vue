@@ -1,6 +1,7 @@
 <template>
   <div>
 
+
     <div class="surface-overlay py-3 px-6 shadow-2 flex align-items-center justify-content-between relative lg:static">
       <img src="/logo.png" alt="Image" height="50" class="mr-0 lg:mr-5"/>
       <a v-ripple class="cursor-pointer block lg:hidden text-700 mt-1 p-ripple"
@@ -13,8 +14,7 @@
 
 
           <li>
-            <LocLink to="/" v-ripple
-                     class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
+            <LocLink to="/" v-ripple class="flex px-0 lg:px-5 py-3 hover:text-blue-600 font-medium transition-colors transition-duration-150 p-ripple">
               <span>{{ $t('nav.home') }}</span>
             </LocLink>
           </li>
@@ -42,7 +42,7 @@
               <span>{{ $t('nav.help') }}</span>
             </LocLink>
           </li>
-          <li>
+          <li class="pl-4">
             <LangSwitcher/>
           </li>
         </ul>
@@ -50,7 +50,7 @@
             class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
           <Button v-if="!store.authenticated" @click="login" :label="$t('nav.login')"
                   class="p-button-text font-bold"></Button>
-          <Button v-else @click="logout" label="Logout" class="p-button-text font-bold"></Button>
+          <Button v-else @click="logout" :label="$t('nav.logout')" class="p-button-text font-bold"></Button>
         </div>
       </div>
     </div>
@@ -86,5 +86,6 @@ const logout = () => {
 const login = () => {
   router.push('/login');
 }
+
 
 </script>
